@@ -1,19 +1,23 @@
 package com.shoesstation.cuoikididong.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "id")
 @Entity
 @Table(name = "delivery_docket")
 public class DeliveryDocket {
@@ -25,10 +29,9 @@ public class DeliveryDocket {
 	private Date CreatedAt;
 	@Column(name = "status")
 	private int status;
-	@ManyToOne
-	@JoinColumn(name = "customer_id")
-	@JsonBackReference
-	private Customer customer;
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name="delivery_docket_id")
+	private List<DeliveryDocketDetail> deliveryDocketDetails;
 	public DeliveryDocket() {
 		// TODO Auto-generated constructor stub
 	}
@@ -50,12 +53,11 @@ public class DeliveryDocket {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public Customer getCustomer() {
-		return customer;
+	public List<DeliveryDocketDetail> getDeliveryDocketDetails() {
+		return deliveryDocketDetails;
 	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setDeliveryDocketDetails(List<DeliveryDocketDetail> deliveryDocketDetails) {
+		this.deliveryDocketDetails = deliveryDocketDetails;
 	}
-	
 	
 }

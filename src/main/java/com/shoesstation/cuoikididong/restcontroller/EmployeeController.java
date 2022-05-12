@@ -17,62 +17,62 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shoesstation.cuoikididong.entity.Customer;
+import com.shoesstation.cuoikididong.entity.Employee;
 import com.shoesstation.cuoikididong.exception.ResourceNotFoundException;
 import com.shoesstation.cuoikididong.exception.RestErrorResponse;
-import com.shoesstation.cuoikididong.repository.CustomerRepository;
+import com.shoesstation.cuoikididong.repository.EmployeeRepository;
 
 
 @RestController
-@RequestMapping("/customers")
-public class CustomerController {
+@RequestMapping("/employees")
+public class EmployeeController {
 	
 	@Autowired
-	private CustomerRepository customerRepository;
+	private EmployeeRepository employeeRepository;
 	@GetMapping
-	public List<Customer> findAllCustomers(){
-		return customerRepository.findAll();
+	public List<Employee> findAllEmployees(){
+		return employeeRepository.findAll();
 	}
 	@GetMapping("/{id}")
-	public Customer getCustomer(@PathVariable int id){
-		Optional<Customer> customerOptional=customerRepository.findById(id);
-		Customer customer=null;
-		if (customerOptional.isPresent()) {
-			customer=customerOptional.get();
+	public Employee getEmployee(@PathVariable int id){
+		Optional<Employee> employeeOptional=employeeRepository.findById(id);
+		Employee employee=null;
+		if (employeeOptional.isPresent()) {
+			employee=employeeOptional.get();
 		}else {
 			throw new ResourceNotFoundException("Không tìm thấy khách hàng có mã id: " +id);
 		}
-		return customer;
+		return employee;
 	}
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Customer saveCustomer(@RequestBody Customer customer) {
-		customer.setId(0);
-		return customerRepository.save(customer);
+	public Employee saveCustomer(@RequestBody Employee employee) {
+		employee.setId(0);
+		return employeeRepository.save(employee);
 	}
 	
 	
 	@PutMapping("/{id}")
-	public Customer updateCustomer (@PathVariable int id,@RequestBody Customer customer) {
-		Optional<Customer> customerOptional=customerRepository.findById(id);
-		Customer c=null;
-		if (customerOptional.isPresent()) {
-			c=customerOptional.get();
-			customer.setId(c.getId());
+	public Employee updateCustomer (@PathVariable int id,@RequestBody Employee employee) {
+		Optional<Employee> employeeOptional=employeeRepository.findById(id);
+		Employee c=null;
+		if (employeeOptional.isPresent()) {
+			c=employeeOptional.get();
+			employee.setId(c.getId());
 		}else {
 			throw new ResourceNotFoundException("Không tìm thấy khách hàng có id: " +id);
 		}
-		return customerRepository.save(customer);
+		return employeeRepository.save(employee);
 	}
 	
 	
 	
 	@DeleteMapping("/{id}")
-	public  ResponseEntity<RestErrorResponse> deleteCustomer(@PathVariable int id) {
-		Optional<Customer> customerOptional=customerRepository.findById(id);
-		if (!customerOptional.isPresent()) {
+	public  ResponseEntity<RestErrorResponse> deleteEmployee(@PathVariable int id) {
+		Optional<Employee> employeeOptional=employeeRepository.findById(id);
+		if (!employeeOptional.isPresent()) {
 			throw new ResourceNotFoundException("Không tìm thấy khách hàng có id: " +id);
 		}
-		customerRepository.deleteById(id);
+		employeeRepository.deleteById(id);
 		return ResponseEntity.ok(new RestErrorResponse("Khách hàng có id: "+id+"đã được xóa!", HttpStatus.OK,LocalDateTime.now()));
 		
 	}
