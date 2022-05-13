@@ -1,5 +1,6 @@
 package com.shoesstation.cuoikididong.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -81,6 +82,10 @@ public class Customer {
 	public void setDeliveryDockets(List<DeliveryDocket> deliveryDockets) {
 		this.deliveryDockets = deliveryDockets;
 	}
-	
-	
+	public void addDeliveryDocket(DeliveryDocket deliveryDocket) {
+		if (deliveryDockets==null) {
+			deliveryDockets=new ArrayList<>();
+		}
+		deliveryDockets.add(deliveryDocket);
+	}
 }

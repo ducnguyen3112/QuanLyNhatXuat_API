@@ -18,6 +18,10 @@ public class ReceivedDocketDetail {
 	private int quantity;
 	@Column(name = "price")
 	private int price;
+	@Column(name = "received_docket_id")
+	private int receivedDocketId;
+	@Column(name = "product_id")
+	private int productId;
 	public ReceivedDocketDetail() {
 		// TODO Auto-generated constructor stub
 	}
@@ -41,4 +45,25 @@ public class ReceivedDocketDetail {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+
+
+	public int getReceivedDocketId() {
+		return receivedDocketId;
+	}
+
+
+	public void setReceivedDocketId(int receivedDocketId) {
+		this.receivedDocketId = receivedDocketId;
+	}
+
+
+	public int getProductId() {
+		return productId;
+	}
+
+
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+	
 }

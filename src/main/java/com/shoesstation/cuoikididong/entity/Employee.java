@@ -1,5 +1,6 @@
 package com.shoesstation.cuoikididong.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -116,6 +117,16 @@ public class Employee {
 	public void setReceivedDockets(List<ReceivedDocket> receivedDockets) {
 		this.receivedDockets = receivedDockets;
 	}
-	
-	
+	public void addDeliveryDocket(DeliveryDocket deliveryDocket) {
+		if (deliveryDockets==null) {
+			deliveryDockets=new ArrayList<>();
+		}
+		deliveryDockets.add(deliveryDocket);
+	}
+	public void addReceivedDocket(ReceivedDocket receivedDocket) {
+		if (receivedDockets==null) {
+			receivedDockets=new ArrayList<>();
+		}
+		receivedDockets.add(receivedDocket);
+	}
 }

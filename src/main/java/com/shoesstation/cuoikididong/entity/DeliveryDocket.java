@@ -1,5 +1,6 @@
 package com.shoesstation.cuoikididong.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +28,10 @@ public class DeliveryDocket {
 	private int id;
 	@Column(name = "created_at")
 	private Date CreatedAt;
+	@Column(name = "employee_id")
+	private int emloyeeId;
+	@Column(name = "customer_id")
+	private int customerId;
 	@Column(name = "status")
 	private int status;
 	@OneToMany(fetch = FetchType.LAZY)
@@ -58,6 +63,24 @@ public class DeliveryDocket {
 	}
 	public void setDeliveryDocketDetails(List<DeliveryDocketDetail> deliveryDocketDetails) {
 		this.deliveryDocketDetails = deliveryDocketDetails;
+	}
+	public void addDeliveryDocketDetail(DeliveryDocketDetail deliveryDocketDetail) {
+		if (deliveryDocketDetails==null) {
+			deliveryDocketDetails=new ArrayList<>();
+		}
+		deliveryDocketDetails.add(deliveryDocketDetail);
+	}
+	public int getEmloyeeId() {
+		return emloyeeId;
+	}
+	public void setEmloyeeId(int emloyeeId) {
+		this.emloyeeId = emloyeeId;
+	}
+	public int getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
 	
 }

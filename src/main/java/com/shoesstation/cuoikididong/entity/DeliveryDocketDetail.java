@@ -18,6 +18,11 @@ public class DeliveryDocketDetail {
 	private int quantity;
 	@Column(name = "price")
 	private int price;
+	@Column(name="delivery_docket_id")
+	private int deliveryDocketId;
+	@Column(name = "product_id")
+	private int productId;
+	
 	public DeliveryDocketDetail() {
 		// TODO Auto-generated constructor stub
 	}
@@ -40,4 +45,21 @@ public class DeliveryDocketDetail {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+
+	public int getDeliveryDocketId() {
+		return deliveryDocketId;
+	}
+
+	public void setDeliveryDocketId(int deliveryDocketId) {
+		this.deliveryDocketId = deliveryDocketId;
+	}
+
+	public int getProductId() {
+		return productId;
+	}
+
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+	
 }

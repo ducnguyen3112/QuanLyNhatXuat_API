@@ -22,6 +22,8 @@ public class ReceivedDocket {
 	private int id;
 	@Column(name = "created_at")
 	private Date createdAt;
+	@Column(name = "employee_id")
+	private int emloyeeId;
 	@Column(name = "supplier_name")
 	private String supplierName;
 	@OneToMany(fetch = FetchType.LAZY)
@@ -54,5 +56,12 @@ public class ReceivedDocket {
 	public void setReceivedDocketDetails(List<ReceivedDocketDetail> receivedDocketDetails) {
 		this.receivedDocketDetails = receivedDocketDetails;
 	}
+	public int getEmloyeeId() {
+		return emloyeeId;
+	}
+	public void setEmloyeeId(int emloyeeId) {
+		this.emloyeeId = emloyeeId;
+	}
+	
 	
 }
