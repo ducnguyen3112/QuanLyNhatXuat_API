@@ -56,10 +56,10 @@ public class ReceivedDocket {
 	public void setReceivedDocketDetails(List<ReceivedDocketDetail> receivedDocketDetails) {
 		this.receivedDocketDetails = receivedDocketDetails;
 	}
-	public int getEmloyeeId() {
+	public int getEmployeeId() {
 		return employeeId;
 	}
-	public void setEmloyeeId(int emloyeeId) {
+	public void setEmployeeId(int emloyeeId) {
 		this.employeeId = emloyeeId;
 	}
 	
