@@ -23,7 +23,7 @@ public class ReceivedDocket {
 	@Column(name = "created_at")
 	private Date createdAt;
 	@Column(name = "employee_id")
-	private int emloyeeId;
+	private int employeeId;
 	@Column(name = "supplier_name")
 	private String supplierName;
 	@OneToMany(fetch = FetchType.LAZY)
@@ -57,10 +57,10 @@ public class ReceivedDocket {
 		this.receivedDocketDetails = receivedDocketDetails;
 	}
 	public int getEmloyeeId() {
-		return emloyeeId;
+		return employeeId;
 	}
 	public void setEmloyeeId(int emloyeeId) {
-		this.emloyeeId = emloyeeId;
+		this.employeeId = emloyeeId;
 	}
 	
 	
