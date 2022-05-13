@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shoesstation.cuoikididong.entity.Employee;
@@ -76,4 +77,15 @@ public class EmployeeController {
 		return ResponseEntity.ok(new RestErrorResponse("Khách hàng có id: "+id+"đã được xóa!", HttpStatus.OK,LocalDateTime.now()));
 		
 	}
+	
+	@GetMapping("/login")
+	public ResponseEntity<?> authenticationEmployee(@RequestParam String phoneNumber,@RequestParam String password){
+		Employee employee=new Employee();
+		 employee=employeeRepository.findByPhoneNumber(phoneNumber);
+		 if (employee!=null && employee.getPassword().equals(password)) {
+			return ResponseEntity.ok(employee);
+		}
+		throw new ResourceNotFoundException("Số điện thoại hoặc mật khẩu không đúng");
+		}
+	
 }

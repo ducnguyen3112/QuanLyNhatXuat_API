@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "employees")
 public class Employee {
@@ -25,6 +27,7 @@ public class Employee {
 	private String fullName;
 	@Column(name = "address")
 	private String address;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "date_of_birth")
 	private Date dateOfBirth;
 	@Column(name = "phone_number")

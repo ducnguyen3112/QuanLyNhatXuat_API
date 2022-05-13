@@ -8,6 +8,7 @@ import com.shoesstation.cuoikididong.entity.Employee;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
+	public Employee findByPhoneNumber(String phoneNumber) ;
 
 }
  

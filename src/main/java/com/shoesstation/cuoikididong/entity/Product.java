@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "products")
 public class Product {
@@ -18,6 +20,7 @@ public class Product {
 	private int id;
 	@Column(name = "name")
 	private String name;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "created_at")
 	private Date createdAt;
 	@Column(name = "status")

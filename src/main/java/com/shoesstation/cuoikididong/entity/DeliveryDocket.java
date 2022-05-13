@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityInfo(
@@ -27,9 +28,10 @@ public class DeliveryDocket {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(name = "created_at")
-	private Date CreatedAt;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date createdAt;
 	@Column(name = "employee_id")
-	private int emloyeeId;
+	private int employeeId;
 	@Column(name = "customer_id")
 	private int customerId;
 	@Column(name = "status")
@@ -46,11 +48,12 @@ public class DeliveryDocket {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public Date getCreatedAt() {
-		return CreatedAt;
+		return createdAt;
 	}
 	public void setCreatedAt(Date createdAt) {
-		CreatedAt = createdAt;
+		this.createdAt = createdAt;
 	}
 	public int getStatus() {
 		return status;
@@ -70,11 +73,11 @@ public class DeliveryDocket {
 		}
 		deliveryDocketDetails.add(deliveryDocketDetail);
 	}
-	public int getEmloyeeId() {
-		return emloyeeId;
+	public int getEmployeeId() {
+		return employeeId;
 	}
-	public void setEmloyeeId(int emloyeeId) {
-		this.emloyeeId = emloyeeId;
+	public void setEmployeeId(int emloyeeId) {
+		this.employeeId = emloyeeId;
 	}
 	public int getCustomerId() {
 		return customerId;
