@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shoesstation.cuoikididong.entity.DeliveryDocket;
+import com.shoesstation.cuoikididong.entity.DeliveryDocketDetail;
 import com.shoesstation.cuoikididong.exception.ResourceNotFoundException;
 import com.shoesstation.cuoikididong.exception.RestErrorResponse;
 import com.shoesstation.cuoikididong.repository.DeliveryDocketRepository;
@@ -75,5 +76,14 @@ public class DeliveryDocketController {
 		deliveryDocketRepository.deleteById(id);
 		return ResponseEntity.ok(new RestErrorResponse("Phiếu xuất có id: "+id+"đã được xóa!", HttpStatus.OK,LocalDateTime.now()));
 		
+	}
+	@GetMapping("/{id}/deliveryDocketDetails")
+	public List<DeliveryDocketDetail> getDeliveryDocketDetailById(@PathVariable int id) {
+	
+		Optional<DeliveryDocket> deliveryDocketOptional=deliveryDocketRepository.findById(id);
+		if (!deliveryDocketOptional.isPresent()) {
+			throw new ResourceNotFoundException("Không tìm thấy phiếu xuất có id: " +id);
+		}
+		return  deliveryDocketOptional.get().getDeliveryDocketDetails();
 	}
 }
