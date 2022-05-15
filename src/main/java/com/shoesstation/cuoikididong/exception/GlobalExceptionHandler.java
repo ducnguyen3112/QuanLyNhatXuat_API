@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleUnwantedException(Exception ex,WebRequest request) {
 		RestErrorResponse errorResponse=new RestErrorResponse(
-				"Lỗi không xác định!",HttpStatus.INTERNAL_SERVER_ERROR,LocalDateTime.now());
+				 ex.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR,LocalDateTime.now());
 		
 		logger.warn(ex.toString());
 		return new ResponseEntity<Object>(errorResponse,HttpStatus.INTERNAL_SERVER_ERROR);
