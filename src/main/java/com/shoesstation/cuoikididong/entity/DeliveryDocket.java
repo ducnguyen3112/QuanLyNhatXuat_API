@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -36,7 +37,7 @@ public class DeliveryDocket {
 	private int customerId;
 	@Column(name = "status")
 	private int status;
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinColumn(name="delivery_docket_id")
 	private List<DeliveryDocketDetail> deliveryDocketDetails;
 	public DeliveryDocket() {
