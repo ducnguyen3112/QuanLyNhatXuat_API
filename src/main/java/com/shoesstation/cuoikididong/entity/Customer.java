@@ -38,6 +38,8 @@ public class Customer {
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name="customer_id")
 	private List<DeliveryDocket> deliveryDockets;
+	@JoinColumn(name="status")
+	private int status;
 	public Customer() {
 	}
 	public int getId() {
@@ -88,4 +90,11 @@ public class Customer {
 		}
 		deliveryDockets.add(deliveryDocket);
 	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
 }

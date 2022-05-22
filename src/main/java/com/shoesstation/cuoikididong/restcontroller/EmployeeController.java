@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shoesstation.cuoikididong.entity.Employee;
 import com.shoesstation.cuoikididong.exception.ResourceNotFoundException;
-import com.shoesstation.cuoikididong.exception.RestErrorResponse;
+import com.shoesstation.cuoikididong.exception.RestResponse;
 import com.shoesstation.cuoikididong.repository.EmployeeRepository;
 
 
@@ -68,13 +68,13 @@ public class EmployeeController {
 	
 	
 	@DeleteMapping("/{id}")
-	public  ResponseEntity<RestErrorResponse> deleteEmployee(@PathVariable int id) {
+	public  ResponseEntity<RestResponse> deleteEmployee(@PathVariable int id) {
 		Optional<Employee> employeeOptional=employeeRepository.findById(id);
 		if (!employeeOptional.isPresent()) {
 			throw new ResourceNotFoundException("Không tìm thấy khách hàng có id: " +id);
 		}
 		employeeRepository.deleteById(id);
-		return ResponseEntity.ok(new RestErrorResponse("Khách hàng có id: "+id+"đã được xóa!", HttpStatus.OK,LocalDateTime.now()));
+		return ResponseEntity.ok(new RestResponse("Khách hàng có id: "+id+" đã được xóa!", HttpStatus.OK,LocalDateTime.now()));
 		
 	}
 	

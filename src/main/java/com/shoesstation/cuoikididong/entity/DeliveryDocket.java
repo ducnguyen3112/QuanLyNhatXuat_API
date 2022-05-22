@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.lang.NonNull;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -32,8 +34,10 @@ public class DeliveryDocket {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createdAt;
 	@Column(name = "employee_id")
+	@NonNull
 	private int employeeId;
 	@Column(name = "customer_id")
+	@NonNull
 	private int customerId;
 	@Column(name = "status")
 	private int status;

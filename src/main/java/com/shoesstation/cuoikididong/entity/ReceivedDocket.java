@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.lang.NonNull;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -26,6 +28,7 @@ public class ReceivedDocket {
 	@Column(name = "created_at")
 	private Date createdAt;
 	@Column(name = "employee_id")
+	@NonNull
 	private int employeeId;
 	@Column(name = "supplier_name")
 	private String supplierName;

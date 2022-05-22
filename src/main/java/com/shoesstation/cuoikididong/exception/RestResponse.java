@@ -5,15 +5,18 @@ import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
 
-public class RestErrorResponse {
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+public class RestResponse {
 	private HttpStatus status;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime timeStamp;
 	private String message;
-	public RestErrorResponse() {
+	public RestResponse() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public RestErrorResponse(String message, HttpStatus status, LocalDateTime timeStamp) {
+	public RestResponse(String message, HttpStatus status, LocalDateTime timeStamp) {
 		super();
 		this.message = message;
 		this.status = status;

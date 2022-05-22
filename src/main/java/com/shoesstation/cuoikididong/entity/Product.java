@@ -27,6 +27,10 @@ public class Product {
 	private int status;
 	@Column(name = "image")
 	private String image;
+	@Column(name = "price")
+	private int price;
+	@Column(name="inventory")
+	private int inventory;
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
@@ -76,5 +80,18 @@ public class Product {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public int getInventory() {
+		return inventory;
+	}
+	public void setInventory(int inventory) {
+		this.inventory = inventory;
+	}
+	
 	
 }

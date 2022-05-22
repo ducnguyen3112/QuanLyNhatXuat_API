@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.shoesstation.cuoikididong.exception.RestErrorResponse;
+import com.shoesstation.cuoikididong.exception.RestResponse;
 import com.shoesstation.cuoikididong.service.CloudDinaryService;
 import com.shoesstation.cuoikididong.service.IStorageService;
 
@@ -25,19 +25,19 @@ public class FileUploadController {
 	private CloudDinaryService cloudDinaryService;
 	
 	@PostMapping("/fileUpload")
-	public ResponseEntity<RestErrorResponse> uploadFile(@RequestParam("file") MultipartFile file){
+	public ResponseEntity<RestResponse> uploadFile(@RequestParam("file") MultipartFile file){
 		try {
 			String generatedFileName=storageService.StoreFile(file);
-			return ResponseEntity.status(HttpStatus.OK).body(new RestErrorResponse(generatedFileName, HttpStatus.OK,LocalDateTime.now()));
+			return ResponseEntity.status(HttpStatus.OK).body(new RestResponse(generatedFileName, HttpStatus.OK,LocalDateTime.now()));
 			
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(new RestErrorResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR,LocalDateTime.now()));
+			return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(new RestResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR,LocalDateTime.now()));
 		}
 	}
 	@PostMapping("/cloudDinary/fileUpload")
-	public ResponseEntity<RestErrorResponse> upLoad(@RequestParam("file") MultipartFile multipartFile) throws IOException{
+	public ResponseEntity<RestResponse> upLoad(@RequestParam("file") MultipartFile multipartFile) throws IOException{
 		Map<?, ?> resultMap=cloudDinaryService.upload(multipartFile);
-		return ResponseEntity.status(HttpStatus.OK).body(new RestErrorResponse(resultMap.get("url").toString(), HttpStatus.OK,LocalDateTime.now()));
+		return ResponseEntity.status(HttpStatus.OK).body(new RestResponse(resultMap.get("url").toString(), HttpStatus.OK,LocalDateTime.now()));
 	}
 	
 }

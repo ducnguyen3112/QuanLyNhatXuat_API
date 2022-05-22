@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.lang.NonNull;
+
 @Entity
 @Table(name = "delivery_docket_detail")
 public class DeliveryDocketDetail {
@@ -19,8 +21,10 @@ public class DeliveryDocketDetail {
 	@Column(name = "price")
 	private int price;
 	@Column(name="delivery_docket_id")
+	@NonNull
 	private int deliveryDocketId;
 	@Column(name = "product_id")
+	@NonNull
 	private int productId;
 	
 	public DeliveryDocketDetail() {

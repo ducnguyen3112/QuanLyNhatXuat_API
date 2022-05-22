@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shoesstation.cuoikididong.entity.ReceivedDocketDetail;
 import com.shoesstation.cuoikididong.exception.ResourceNotFoundException;
-import com.shoesstation.cuoikididong.exception.RestErrorResponse;
+import com.shoesstation.cuoikididong.exception.RestResponse;
 import com.shoesstation.cuoikididong.repository.ReceivedDocketDetailRepository;
 
 
@@ -67,13 +67,13 @@ public class ReceivedDocketDetailController {
 	
 	
 	@DeleteMapping("/{id}")
-	public  ResponseEntity<RestErrorResponse> deleteReceivedDocketDetail(@PathVariable int id) {
+	public  ResponseEntity<RestResponse> deleteReceivedDocketDetail(@PathVariable int id) {
 		Optional<ReceivedDocketDetail> receivedDocketDetailOptional=ReceivedDocketDetailRepository.findById(id);
 		if (!receivedDocketDetailOptional.isPresent()) {
 			throw new ResourceNotFoundException("Không tìm thấy chi tiết phiếu xuất có id: " +id);
 		}
 		ReceivedDocketDetailRepository.deleteById(id);
-		return ResponseEntity.ok(new RestErrorResponse("Chi tiết phiếu xuất có id: "+id+"đã được xóa!", HttpStatus.OK,LocalDateTime.now()));
+		return ResponseEntity.ok(new RestResponse("Chi tiết phiếu xuất có id: "+id+" đã được xóa!", HttpStatus.OK,LocalDateTime.now()));
 		
 	}
 }

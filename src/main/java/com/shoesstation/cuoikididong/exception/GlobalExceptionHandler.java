@@ -17,13 +17,13 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<Object> handleResourceNotFoundException(
 			ResourceNotFoundException ex,WebRequest request){
-		RestErrorResponse errorResponse=new RestErrorResponse(
+		RestResponse errorResponse=new RestResponse(
 				ex.getMessage(),HttpStatus.NOT_FOUND,LocalDateTime.now());
 		return new ResponseEntity<Object>(errorResponse,HttpStatus.NOT_FOUND);
 	}
 	@ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleUnwantedException(Exception ex,WebRequest request) {
-		RestErrorResponse errorResponse=new RestErrorResponse(
+		RestResponse errorResponse=new RestResponse(
 				 ex.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR,LocalDateTime.now());
 		
 		logger.warn(ex.toString());

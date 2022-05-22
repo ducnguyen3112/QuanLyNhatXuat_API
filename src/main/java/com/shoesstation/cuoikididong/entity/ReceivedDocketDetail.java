@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.lang.NonNull;
+
 @Entity
 @Table(name = "received_docket_detail")
 public class ReceivedDocketDetail {
@@ -19,8 +21,10 @@ public class ReceivedDocketDetail {
 	@Column(name = "price")
 	private int price;
 	@Column(name = "received_docket_id")
+	@NonNull
 	private int receivedDocketId;
 	@Column(name = "product_id")
+	@NonNull
 	private int productId;
 	public ReceivedDocketDetail() {
 		// TODO Auto-generated constructor stub

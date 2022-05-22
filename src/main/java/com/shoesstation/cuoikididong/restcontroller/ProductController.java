@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shoesstation.cuoikididong.entity.Product;
 import com.shoesstation.cuoikididong.exception.ResourceNotFoundException;
-import com.shoesstation.cuoikididong.exception.RestErrorResponse;
+import com.shoesstation.cuoikididong.exception.RestResponse;
 import com.shoesstation.cuoikididong.repository.ProductRepository;
 
 
@@ -47,6 +47,7 @@ public class ProductController {
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Product saveproduct(@RequestBody Product product) {
 		product.setId(0);
+		product.setInventory(0);
 		return productRepository.save(product);
 	}
 	
@@ -67,13 +68,13 @@ public class ProductController {
 	
 	
 	@DeleteMapping("/{id}")
-	public  ResponseEntity<RestErrorResponse> deleteproduct(@PathVariable int id) {
+	public  ResponseEntity<RestResponse> deleteproduct(@PathVariable int id) {
 		Optional<Product> productOptional=productRepository.findById(id);
 		if (!productOptional.isPresent()) {
 			throw new ResourceNotFoundException("Không tìm thấy sản phẩm có id: " +id);
 		}
 		productRepository.deleteById(id);
-		return ResponseEntity.ok(new RestErrorResponse("Sản phẩm có id: "+id+" đã được xóa!", HttpStatus.OK,LocalDateTime.now()));
+		return ResponseEntity.ok(new RestResponse("Sản phẩm có id: "+id+" đã được xóa!", HttpStatus.OK,LocalDateTime.now()));
 		
 	}
 }
