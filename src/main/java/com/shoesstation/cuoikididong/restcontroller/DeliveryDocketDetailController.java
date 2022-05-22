@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shoesstation.cuoikididong.entity.DeliveryDocketDetail;
+import com.shoesstation.cuoikididong.entity.Product;
 import com.shoesstation.cuoikididong.exception.ResourceNotFoundException;
 import com.shoesstation.cuoikididong.exception.RestResponse;
 import com.shoesstation.cuoikididong.repository.DeliveryDocketDetailRepository;
+import com.shoesstation.cuoikididong.repository.ProductRepository;
 
 
 @RestController
@@ -29,6 +31,8 @@ public class DeliveryDocketDetailController {
 	
 	@Autowired
 	private DeliveryDocketDetailRepository deliveryDocketDetailRepository;
+	@Autowired
+	private ProductRepository productRepository;
 	@GetMapping
 	public List<DeliveryDocketDetail> findAlldeliveryDocketDetails(){
 		return deliveryDocketDetailRepository.findAll();
@@ -47,6 +51,22 @@ public class DeliveryDocketDetailController {
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public DeliveryDocketDetail savedeliveryDocketDetail(@RequestBody DeliveryDocketDetail deliveryDocketDetail) {
 		deliveryDocketDetail.setId(0);
+		Optional<Product> productOptional=productRepository.findById(deliveryDocketDetail.getProductId());
+		
+		if (!productOptional.isPresent()) {
+			throw new ResourceNotFoundException("Sản phẩm có id: " +deliveryDocketDetail.getProductId()+" Không tồn tại");
+		}else {
+			Product product=productOptional.get();
+			int inventory=product.getInventory();
+			if (inventory < deliveryDocketDetail.getQuantity()) {
+				throw new RuntimeException("Vượt quá số lượng tồn kho(<="+inventory+")");
+			}else {
+				inventory-=deliveryDocketDetail.getQuantity();
+				product.setInventory(inventory);
+				productRepository.save(product);
+			}
+		}
+		
 		return deliveryDocketDetailRepository.save(deliveryDocketDetail);
 	}
 	

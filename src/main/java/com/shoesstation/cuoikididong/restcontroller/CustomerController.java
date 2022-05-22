@@ -1,14 +1,10 @@
 package com.shoesstation.cuoikididong.restcontroller;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shoesstation.cuoikididong.entity.Customer;
 import com.shoesstation.cuoikididong.exception.ResourceNotFoundException;
-import com.shoesstation.cuoikididong.exception.RestResponse;
 import com.shoesstation.cuoikididong.repository.CustomerRepository;
 
 
@@ -62,18 +57,5 @@ public class CustomerController {
 			throw new ResourceNotFoundException("Không tìm thấy khách hàng có id: " +id);
 		}
 		return customerRepository.save(customer);
-	}
-	
-	
-	
-	@DeleteMapping("/{id}")
-	public  ResponseEntity<RestResponse> deleteCustomer(@PathVariable int id) {
-		Optional<Customer> customerOptional=customerRepository.findById(id);
-		if (!customerOptional.isPresent()) {
-			throw new ResourceNotFoundException("Không tìm thấy khách hàng có id: " +id);
-		}
-		customerRepository.deleteById(id);
-		return ResponseEntity.ok(new RestResponse("Khách hàng có id: "+id+" đã được xóa!", HttpStatus.OK,LocalDateTime.now()));
-		
 	}
 }

@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shoesstation.cuoikididong.entity.Product;
 import com.shoesstation.cuoikididong.entity.ReceivedDocketDetail;
 import com.shoesstation.cuoikididong.exception.ResourceNotFoundException;
 import com.shoesstation.cuoikididong.exception.RestResponse;
+import com.shoesstation.cuoikididong.repository.ProductRepository;
 import com.shoesstation.cuoikididong.repository.ReceivedDocketDetailRepository;
 
 
@@ -29,6 +31,8 @@ public class ReceivedDocketDetailController {
 	
 	@Autowired
 	private ReceivedDocketDetailRepository ReceivedDocketDetailRepository;
+	@Autowired
+	private ProductRepository productRepository;
 	@GetMapping
 	public List<ReceivedDocketDetail> findAllReceivedDocketDetails(){
 		return ReceivedDocketDetailRepository.findAll();
@@ -47,6 +51,15 @@ public class ReceivedDocketDetailController {
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ReceivedDocketDetail saveReceivedDocketDetail(@RequestBody ReceivedDocketDetail receivedDocketDetail) {
 		receivedDocketDetail.setId(0);
+		Optional<Product> productOptional=productRepository.findById(receivedDocketDetail.getProductId());
+		
+		if (!productOptional.isPresent()) {
+			throw new ResourceNotFoundException("Sản phẩm có id: " +receivedDocketDetail.getProductId()+" Không tồn tại");
+		}else {
+			Product product=productOptional.get();
+				product.setInventory(product.getInventory()+receivedDocketDetail.getQuantity());
+				productRepository.save(product);
+		}
 		return ReceivedDocketDetailRepository.save(receivedDocketDetail);
 	}
 	
