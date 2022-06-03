@@ -1,6 +1,7 @@
 package com.shoesstation.cuoikididong.restcontroller;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +51,7 @@ public class ProductController {
 	public Product saveproduct(@RequestBody Product product) {
 		product.setId(0);
 		product.setInventory(0);
+		product.setCreatedAt(new Date());
 		return productRepository.save(product);
 	}
 	

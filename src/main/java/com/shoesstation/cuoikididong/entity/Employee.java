@@ -27,7 +27,7 @@ public class Employee {
 	private String fullName;
 	@Column(name = "address")
 	private String address;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@Column(name = "date_of_birth")
 	private Date dateOfBirth;
 	@Column(name = "phone_number")

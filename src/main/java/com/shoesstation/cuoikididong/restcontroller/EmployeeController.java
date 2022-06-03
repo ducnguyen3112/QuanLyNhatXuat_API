@@ -1,5 +1,6 @@
 package com.shoesstation.cuoikididong.restcontroller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +47,7 @@ public class EmployeeController {
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Employee saveCustomer(@RequestBody Employee employee) {
 		employee.setId(0);
+		employee.setDateOfBirth(new Date());
 		return employeeRepository.save(employee);
 	}
 	

@@ -1,6 +1,7 @@
 package com.shoesstation.cuoikididong.restcontroller;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +51,7 @@ public class DeliveryDocketController {
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public DeliveryDocket savedeliveryDocket(@RequestBody DeliveryDocket deliveryDocket) {
 		deliveryDocket.setId(0);
+		deliveryDocket.setCreatedAt(new Date());
 		return deliveryDocketRepository.save(deliveryDocket);
 	}
 	
