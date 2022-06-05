@@ -26,7 +26,7 @@ import com.shoesstation.cuoikididong.repository.ProductRepository;
 
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/products")
 public class ProductController {
 	

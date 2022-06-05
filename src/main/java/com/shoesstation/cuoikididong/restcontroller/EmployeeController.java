@@ -23,7 +23,7 @@ import com.shoesstation.cuoikididong.repository.EmployeeRepository;
 
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/employees")
 public class EmployeeController {
 	

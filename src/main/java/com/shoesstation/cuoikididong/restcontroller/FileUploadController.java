@@ -19,7 +19,7 @@ import com.shoesstation.cuoikididong.service.IStorageService;
 
 
 @Controller
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class FileUploadController {
 	@Autowired
 	private IStorageService storageService;

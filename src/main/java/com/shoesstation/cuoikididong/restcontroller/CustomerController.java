@@ -20,7 +20,7 @@ import com.shoesstation.cuoikididong.repository.CustomerRepository;
 
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/customers")
 public class CustomerController {
 	

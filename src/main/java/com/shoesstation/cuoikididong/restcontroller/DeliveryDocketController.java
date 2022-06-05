@@ -27,7 +27,7 @@ import com.shoesstation.cuoikididong.repository.DeliveryDocketRepository;
 
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/deliveryDockets")
 public class DeliveryDocketController {
 	
