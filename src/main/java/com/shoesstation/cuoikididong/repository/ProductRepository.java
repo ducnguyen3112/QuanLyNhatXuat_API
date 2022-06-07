@@ -8,6 +8,5 @@ import com.shoesstation.cuoikididong.entity.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
-
 }
  
