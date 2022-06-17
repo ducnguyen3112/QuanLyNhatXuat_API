@@ -51,10 +51,12 @@ public class StatisticController {
 		List<DeliveryDocket> deliveryDockets=new ArrayList<DeliveryDocket>();
 		deliveryDockets=deliveryRepository.findAll();
 		for (DeliveryDocket deliveryDocket : deliveryDockets) {
-			numDelivery++;
+			if (deliveryDocket.getStatus()==2) {
+				numDelivery++;
 			for (DeliveryDocketDetail deliveryDocketDetail : deliveryDocket.getDeliveryDocketDetails()) {
 				valueDelivery+=deliveryDocketDetail.getQuantity()*deliveryDocketDetail.getPrice();
-			}
+				}
+			}			
 		}
 		statistics.setNumDelivery(numDelivery);
 		statistics.setValueDelivery(valueDelivery);
@@ -62,9 +64,9 @@ public class StatisticController {
 		int valueReceived=0;
 		List<ReceivedDocket> ReceivedDockets=new ArrayList<ReceivedDocket>();
 		ReceivedDockets=ReceivedRepository.findAll();
-		for (ReceivedDocket ReceivedDocket : ReceivedDockets) {
-			numReceived++;
-			for (ReceivedDocketDetail ReceivedDocketDetail : ReceivedDocket.getReceivedDocketDetails()) {
+		for (ReceivedDocket receivedDocket : ReceivedDockets) {
+				numReceived++;
+			for (ReceivedDocketDetail ReceivedDocketDetail : receivedDocket.getReceivedDocketDetails()) {
 				valueReceived+=ReceivedDocketDetail.getQuantity()*ReceivedDocketDetail.getPrice();
 			}
 		}
